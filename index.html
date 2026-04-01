@@ -2,28 +2,205 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Profil</title>
-    <link 
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
-        rel="stylesheet" 
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" 
-        crossorigin="anonymous"
-    >
+    <title>Sistem Informasi Desa</title>
+
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
   </head>
-  <body class="bg-secondary bg-opacity-10">
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="card border-0 border-top border-primary border-5 shadow-lg rounded-4" style="width: 25rem;">
-            <div class="card-body text-center p-5">
-                <h2 class="card-title fw-bolder text-dark mb-4">Abrian Oktavianus Lonteng</h2>
-                <p class="text-muted fw-medium font-monospace mb-0">NIM: 210211060121 | Kelas: B</p>
+  <body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm sticky-top">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="#">
+                    <img src="./assets/images/logo_minsel.png" alt="Logo Minahasa Selatan" width="35" class="d-inline-block align-text-center me-2">
+                    Desa Pondos
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto fw-medium">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Beranda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#profil">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#layanan">Layanan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#kontak">Kontak</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="d-flex align-items-center justify-content-center text-center text-white">
+            <div class="container hero-content">
+                <h1 class="display-3 fw-bold mb-3">Selamat Datang di Desa Pondos</h1>
+                <p class="lead mb-4">Mewujudkan desa digital yang transparan, inovatif, dan sejahtera untuk seluruh masyarakat Minahasa Selatan.</p>
+                <a href="#informasi-desa" class="btn btn-success btn-lg px-4 fw-medium shadow">Jelajahi Desa</a>
+            </div>
+
+            <div class="hero-overlay"></div>
+        </section>
+
+        <section id="informasi-desa" class="py-5 bg-light">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold">Mengenal Desa Pondos</h2>
+                    <hr class="w-25 mx-auto text-success border-2 opacity-75">
+                </div>
+
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-6">
+                        <h4 class="mb-3">Sejarah & Visi Misi</h4>
+                        <p class="text-muted" style="text-align: justify;">
+                            Desa Pondos terletak di Kecamatan Amurang Barat, Kabupaten Minahasa Selatan, Sulawesi Utara. 
+                            Sebagai desa yang terus berkembang, kami mengedepankan nilai-nilai gotong royong (Mapalus) 
+                            yang menjadi warisan leluhur tanah Minahasa.
+                        </p>
+                        <p class="text-muted" style="text-align: justify;">
+                            Pemerintah Desa Pondos berkomitmen untuk mewujudkan tata kelola desa yang transparan, 
+                            inovatif, dan berbasis pelayanan digital untuk mempermudah urusan administrasi seluruh warga masyarakat.
+                        </p>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="card info-card border-0 shadow-sm h-100 text-center py-3">
+                                    <div class="card-body">
+                                        <h1 class="display-5 text-success fw-bold">4</h1>
+                                        <p class="card-text text-muted mb-0">Jaga / Dusun</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card info-card border-0 shadow-sm h-100 text-center py-3">
+                                    <div class="card-body">
+                                        <h1 class="display-5 text-success fw-bold">1.250</h1>
+                                        <p class="card-text text-muted mb-0">Total Penduduk</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card info-card border-0 shadow-sm h-100 text-center py-3">
+                                    <div class="card-body">
+                                        <h1 class="display-5 text-success fw-bold">350</h1>
+                                        <p class="card-text text-muted mb-0">Kepala Keluarga</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card info-card border-0 shadow-sm h-100 text-center py-3">
+                                    <div class="card-body">
+                                        <h1 class="display-5 text-success fw-bold">95%</h1>
+                                        <p class="card-text text-muted mb-0">Petani / Pekebun</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="layanan-singkat" class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold">Layanan Administrasi</h2>
+                    <hr class="w-25 mx-auto text-success border-2 opacity-75">
+                    <p class="text-muted">Kemudahan mengurus dokumen kependudukan secara cepat dan transparan.</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm layanan-card border-top border-success border-4">
+                            <div class="card-body text-center p-4">
+                                <div class="display-4 mb-3">📄</div>
+                                <h4 class="card-title fw-bold">Surat Pengantar</h4>
+                                <p class="card-text text-muted">Pembuatan surat pengantar RT/RW untuk keperluan SKCK, domisili, dan izin usaha.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm layanan-card border-top border-success border-4">
+                            <div class="card-body text-center p-4">
+                                <div class="display-4 mb-3">👨‍👩‍👧‍👦</div>
+                                <h4 class="card-title fw-bold">Kartu Keluarga</h4>
+                                <p class="card-text text-muted">Layanan pembaruan data anggota keluarga, pemecahan KK, dan pembuatan KK baru.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm layanan-card border-top border-success border-4">
+                            <div class="card-body text-center p-4">
+                                <div class="display-4 mb-3">🍼</div>
+                                <h4 class="card-title fw-bold">Akta Kelahiran</h4>
+                                <p class="card-text text-muted">Pencatatan sipil untuk kelahiran anak dengan proses integrasi data ke Dinas Dukcapil.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-5">
+                    <a href="#" class="btn btn-outline-success px-4 rounded-pill fw-medium">Lihat Semua Layanan</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white pt-5 pb-4">
+        <div class="container text-md-start">
+            <div class="row text-md-start">
+                <div class="col-md-5 col-lg-5 col-xl-5 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold text-success">Desa Pondos</h5>
+                    <p class="text-light opacity-75" style="text-align: justify;">
+                        Sistem Informasi Desa Terpadu Desa Pondos, Kecamatan Amurang Barat, Kabupaten Minahasa Selatan. 
+                        Kami berkomitmen memberikan pelayanan administrasi yang cepat, transparan, dan akuntabel untuk seluruh lapisan masyarakat.
+                    </p>
+                </div>
+
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold text-success">Tautan Cepat</h5>
+                    <p><a href="#" class="text-white text-decoration-none footer-link">Beranda</a></p>
+                    <p><a href="#informasi-desa" class="text-white text-decoration-none footer-link">Profil Desa</a></p>
+                    <p><a href="#layanan-singkat" class="text-white text-decoration-none footer-link">Layanan Administrasi</a></p>
+                    <p><a href="#" class="text-white text-decoration-none footer-link">Transparansi Dana</a></p>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold text-success">Hubungi Kami</h5>
+                    <p class="text-light opacity-75"><span class="me-3">📍</span> Jl. Trans Sulawesi, Desa Pondos, Minahasa Selatan</p>
+                    <p class="text-light opacity-75"><span class="me-3">📧</span> pemdes@pondos.desa.id</p>
+                    <p class="text-light opacity-75"><span class="me-3">📞</span> +62 812 3456 7890</p>
+                </div>
+            </div>
+
+            <hr class="mb-4 border-light opacity-25">
+
+            <div class="row align-items-center text-center text-md-start">
+                <div class="col-md-7 col-lg-8">
+                    <p class="text-light opacity-75 mb-0"> Copyright © 2026 Hak Cipta Dilindungi oleh:
+                        <a href="#" style="text-decoration: none;">
+                            <strong class="text-success">Pemerintah Desa Pondos</strong>
+                        </a>
+                    </p>
+                </div>
+                <div class="col-md-5 col-lg-4 text-center text-md-end mt-3 mt-md-0"></div>
+            </div>
+            
         </div>
-    </div>
-    <script 
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous">
-    </script>
+    </footer>
+
+    <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
