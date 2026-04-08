@@ -1,3 +1,5 @@
+/* Hero */
+
 #hero {
     position: relative;
     height: 100vh;
@@ -21,7 +23,7 @@
     z-index: 2;
 }
 
-
+/* Info Card */
 
 .info-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -32,7 +34,7 @@
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
-
+/* Layanan Card */
 
 .layanan-card {
     transition: all 0.3s ease-in-out;
@@ -48,6 +50,8 @@
     border-top-width: 6px !important;
 }
 
+/* Footer */
+
 .footer-link {
     transition: color 0.3s ease;
 }
@@ -56,4 +60,57 @@
     color: #198754 !important;
     text-decoration: underline !important;
     opacity: 1 !important;
+}
+
+/* Profil Page */
+
+.page-header {
+    padding-top: 5rem;
+    padding-bottom: 4rem;
+    background: linear-gradient(135deg, #198754 0%, #146c43 100%);
+}
+
+/* Timeline */
+.timeline-container {
+    position: relative;
+}
+
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #146c43;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #146c43;
+    top: 20px;
+}
+
+.timeline-content {
+    width: 45%;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    margin-left: auto;
+
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    text-align: right;
+
 }
