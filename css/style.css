@@ -23,33 +23,6 @@
     z-index: 2;
 }
 
-/* Info Card */
-
-.info-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.info-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-}
-
-/* Layanan Card */
-
-.layanan-card {
-    transition: all 0.3s ease-in-out;
-}
-
-.layanan-card:hover {
-    transform: translateY(-10px);
-    background-color: #f8f9fa;
-    cursor: pointer;
-}
-
-.border-top.border-4 {
-    border-top-width: 6px !important;
-}
-
 /* Footer */
 
 .footer-link {
@@ -70,47 +43,19 @@
     background: linear-gradient(135deg, #198754 0%, #146c43 100%);
 }
 
-/* Timeline */
-.timeline-container {
-    position: relative;
+@media (max-width: 991.98px) {
+    #nav-toggle:checked ~ #navbarNav {
+        display: block !important;
+    }
 }
 
-.timeline-container::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background-color: #146c43;
+/* Custom Effects */
+
+.card-hover-elevate {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.timeline-item {
-    position: relative;
-    margin-bottom: 40px;
-}
-
-.timeline-dot {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #146c43;
-    top: 20px;
-}
-
-.timeline-content {
-    width: 45%;
-}
-
-.timeline-item:nth-child(even) .timeline-content {
-    margin-left: auto;
-
-}
-
-.timeline-item:nth-child(odd) .timeline-content {
-    text-align: right;
-
+.card-hover-elevate:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
 }
