@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <title>Kontak - Sistem Informasi Desa</title>
+
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm sticky-top">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="#">
+                    <img src="./assets/images/logo_minsel.png" alt="Logo Minahasa Selatan" width="35" class="d-inline-block align-text-center me-2">
+                    Desa Pondos
+                </a>
+
+                <input type="checkbox" id="nav-toggle" class="d-none nav-checkbox">
+                <label for="nav-toggle" class="navbar-toggler m-0 shadow-none border-0 pe-auto" style="cursor: pointer;">
+                    <span class="navbar-toggler-icon"></span>
+                </label>
+
+                <div class="collapse navbar-collapse menu-collapse mt-3 mt-lg-0" id="navbarNav">
+                    <ul class="navbar-nav ms-auto fw-medium">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Beranda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="profil.html">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="layanan.html">Layanan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="berita.html">Berita</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="transparansi.html">Transparansi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="kontak.html">Kontak</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header text-white text-center shadow-sm">
+            <div class="container">
+                <h1 class="display-5 fw-bold mb-3">Hubungi Kami</h1>
+                <p class="lead mb-0">Sampaikan pertanyaan, saran, atau keluhan Anda kepada Pemerintah Desa Pondos</p>
+            </div>
+        </section>
+
+        <section id="info-kontak" class="py-5 bg-light">
+            <div class="container">
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm h-100 text-center card-hover-elevate">
+                            <div class="card-body p-4">
+                                <div class="display-4 mb-3">📍</div>
+                                <h5 class="fw-bold">Alamat</h5>
+                                <p class="text-muted mb-0">Jl. Trans Sulawesi, Desa Pondos, Kec. Amurang Barat, Kab. Minahasa Selatan, Sulawesi Utara</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm h-100 text-center card-hover-elevate">
+                            <div class="card-body p-4">
+                                <div class="display-4 mb-3">📧</div>
+                                <h5 class="fw-bold">Email</h5>
+                                <p class="text-muted mb-2">pemdes@pondos.desa.id</p>
+                                <p class="text-muted mb-0 small">Balasan dalam 1-2 hari kerja</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm h-100 text-center card-hover-elevate">
+                            <div class="card-body p-4">
+                                <div class="display-4 mb-3">📞</div>
+                                <h5 class="fw-bold">Telepon</h5>
+                                <p class="text-muted mb-2">+62 812 3456 7890</p>
+                                <p class="text-muted mb-0 small">Senin - Jumat, 08:00 - 15:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="form-kontak" class="py-5">
+            <div class="container">
+                <div class="row g-5 align-items-start">
+                    <div class="col-lg-6">
+                        <h2 class="fw-bold mb-2">Kirim Pesan</h2>
+                        <hr class="w-25 text-success border-2 opacity-75">
+                        <p class="text-muted mb-4">Silakan isi formulir di bawah ini untuk menyampaikan pesan kepada Pemerintah Desa Pondos.</p>
+                        
+                        <form action="#" method="post">
+                            <div class="mb-3">
+                                <label for="nama" class="form-label fw-medium">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="nama" placeholder="Masukkan nama lengkap Anda">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label fw-medium">Alamat Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="contoh@email.com">
+                            </div>
+                            <div class="mb-3">
+                                <label for="subjek" class="form-label fw-medium">Subjek</label>
+                                <select class="form-select" id="subjek">
+                                    <option selected disabled>-- Pilih Subjek --</option>
+                                    <option>Pertanyaan Layanan</option>
+                                    <option>Saran & Masukan</option>
+                                    <option>Pengaduan</option>
+                                    <option>Informasi Umum</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="pesan" class="form-label fw-medium">Pesan</label>
+                                <textarea class="form-control" id="pesan" rows="5" placeholder="Tulis pesan Anda di sini..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success px-4 fw-medium">Kirim Pesan</button>
+                        </form>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <h2 class="fw-bold mb-2">Lokasi Desa</h2>
+                        <hr class="w-25 text-success border-2 opacity-75">
+                        <p class="text-muted mb-4">Kantor Desa Pondos, Kecamatan Amurang Barat, Minahasa Selatan.</p>
+                        
+                        <div class="card border-0 shadow-sm overflow-hidden rounded-3">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15956.18395037953!2d124.49445926150031!3d1.1273799354240048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x327df7ff10c62e67%3A0x97421ef5bdf4fc08!2sPondos%2C%20Amurang%20Barat%2C%20South%20Minahasa%20Regency%2C%20North%20Sulawesi%2C%20Indonesia!5e0!3m2!1sen!2sus!4v1775824916356!5m2!1sen!2sus"
+                                width="600"
+                                height="450"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white pt-5 pb-4">
+        <div class="container text-md-start">
+            <div class="row text-md-start">
+                <div class="col-md-5 col-lg-5 col-xl-5 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold text-success">Desa Pondos</h5>
+                    <p class="text-light opacity-75" style="text-align: justify;">
+                        Sistem Informasi Desa Terpadu Desa Pondos, Kecamatan Amurang Barat, Kabupaten Minahasa Selatan. 
+                        Kami berkomitmen memberikan pelayanan administrasi yang cepat, transparan, dan akuntabel untuk seluruh lapisan masyarakat.
+                    </p>
+                </div>
+
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold text-success">Tautan Cepat</h5>
+                    <p><a href="index.html" class="text-white text-decoration-none footer-link">Beranda</a></p>
+                    <p><a href="profil.html" class="text-white text-decoration-none footer-link">Profil Desa</a></p>
+                    <p><a href="layanan.html" class="text-white text-decoration-none footer-link">Layanan Administrasi</a></p>
+                    <p><a href="berita.html" class="text-white text-decoration-none footer-link">Berita & Informasi</a></p>
+                    <p><a href="transparansi.html" class="text-white text-decoration-none footer-link">Transparansi Dana</a></p>
+                    <p><a href="kontak.html" class="text-white text-decoration-none footer-link">Kontak</a></p>
+                    <p><a href="login.html" class="text-white text-decoration-none footer-link">🔐 Login Admin</a></p>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold text-success">Hubungi Kami</h5>
+                    <p class="text-light opacity-75"><span class="me-3">📍</span> Jl. Trans Sulawesi, Desa Pondos, Minahasa Selatan</p>
+                    <p class="text-light opacity-75"><span class="me-3">📧</span> pemdes@pondos.desa.id</p>
+                    <p class="text-light opacity-75"><span class="me-3">📞</span> +62 812 3456 7890</p>
+                </div>
+            </div>
+
+            <hr class="mb-4 border-light opacity-25">
+
+            <div class="row align-items-center text-center text-md-start">
+                <div class="col-md-7 col-lg-8">
+                    <p class="text-light opacity-75 mb-0"> Copyright © 2026 Hak Cipta Dilindungi oleh:
+                        <a href="#" style="text-decoration: none;">
+                            <strong class="text-success">Pemerintah Desa Pondos</strong>
+                        </a>
+                    </p>
+                </div>
+                <div class="col-md-5 col-lg-4 text-center text-md-end mt-3 mt-md-0"></div>
+            </div>
+            
+        </div>
+    </footer>
+
+  </body>
+</html>
