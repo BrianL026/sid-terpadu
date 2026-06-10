@@ -52,4 +52,5 @@ next-env.d.ts
 /.vscode
 
 # Local backup directories
-_static_backup//arti
+/_static_backup/
+/dokumentasi
