@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import Link from "next/link";
 
 const getCategoryBadgeClass = (category) => {
   switch (category?.toLowerCase()) {
@@ -56,7 +57,9 @@ export default async function Berita() {
                     <p className="text-muted" style={{ textAlign: "justify" }}>
                       {news.content}
                     </p>
-                    <a href="#" className="text-success fw-medium text-decoration-none">Baca selengkapnya →</a>
+                    <Link href={`/berita/${news.slug}`} className="text-success fw-medium text-decoration-none">
+                      Baca selengkapnya →
+                    </Link>
                   </div>
                 </div>
               </div>

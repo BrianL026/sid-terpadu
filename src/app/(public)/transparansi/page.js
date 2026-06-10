@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import BudgetChart from "@/components/BudgetChart";
 
 export default async function Transparansi() {
   // Query all budget records from SQLite
@@ -88,6 +89,10 @@ export default async function Transparansi() {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="mt-5">
+            <BudgetChart totalPendapatan={totalPendapatan} totalBelanja={totalBelanja} />
           </div>
         </div>
       </section>

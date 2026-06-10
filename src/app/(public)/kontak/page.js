@@ -10,17 +10,48 @@ export default function Kontak() {
     pesan: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setIsSubmitted(false);
+    setLoading(true);
+
     if (!formData.nama || !formData.email || !formData.subjek || !formData.pesan) {
       alert("Harap isi semua kolom formulir.");
+      setLoading(false);
       return;
     }
-    // Simulate API call
-    console.log("Pesan terkirim:", formData);
-    setIsSubmitted(true);
-    setFormData({ nama: '', email: '', subjek: '', pesan: '' });
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.nama,
+          email: formData.email,
+          subject: formData.subjek,
+          message: formData.pesan,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Terjadi kesalahan saat mengirim pesan.');
+      }
+
+      setIsSubmitted(true);
+      setFormData({ nama: '', email: '', subjek: '', pesan: '' });
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -91,6 +122,12 @@ export default function Kontak() {
                 </div>
               )}
 
+              {error && (
+                <div className="alert alert-danger py-2 px-3 small mb-3" role="alert">
+                  {error}
+                </div>
+              )}
+
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="nama" className="form-label fw-medium">Nama Lengkap</label>
@@ -101,6 +138,7 @@ export default function Kontak() {
                     placeholder="Masukkan nama lengkap Anda" 
                     value={formData.nama}
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className="mb-3">
@@ -112,6 +150,7 @@ export default function Kontak() {
                     placeholder="contoh@email.com"
                     value={formData.email}
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className="mb-3">
@@ -121,6 +160,7 @@ export default function Kontak() {
                     id="subjek"
                     value={formData.subjek}
                     onChange={handleChange}
+                    required
                   >
                     <option value="" disabled>-- Pilih Subjek --</option>
                     <option value="Pertanyaan Layanan">Pertanyaan Layanan</option>
@@ -138,9 +178,16 @@ export default function Kontak() {
                     placeholder="Tulis pesan Anda di sini..."
                     value={formData.pesan}
                     onChange={handleChange}
+                    required
                   ></textarea>
                 </div>
-                <button type="submit" className="btn btn-success px-4 fw-medium">Kirim Pesan</button>
+                <button 
+                  type="submit" 
+                  className="btn btn-success px-4 fw-medium" 
+                  disabled={loading}
+                >
+                  {loading ? 'Mengirim...' : 'Kirim Pesan'}
+                </button>
               </form>
             </div>
 
