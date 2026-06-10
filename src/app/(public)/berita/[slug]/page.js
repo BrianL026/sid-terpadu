@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
+import ShareButtons from '@/components/ShareButtons';
 
 export default async function NewsDetail({ params }) {
   const { slug } = await params;
@@ -80,12 +81,7 @@ export default async function NewsDetail({ params }) {
           <Link href="/berita" className="btn btn-outline-success px-4 rounded-pill fw-medium">
             ← Kembali ke Berita
           </Link>
-          <div className="share-buttons">
-            <span className="text-muted small me-2">Bagikan:</span>
-            <button className="btn btn-sm btn-light rounded-circle me-1" title="Share Facebook"><i className="bi bi-facebook text-primary"></i></button>
-            <button className="btn btn-sm btn-light rounded-circle me-1" title="Share Twitter"><i className="bi bi-twitter-x"></i></button>
-            <button className="btn btn-sm btn-light rounded-circle" title="Copy Link" onClick={() => { navigator.clipboard.writeText(window.location.href); alert('Tautan disalin!'); }}><i className="bi bi-link-45deg"></i></button>
-          </div>
+          <ShareButtons />
         </div>
       </article>
     </div>

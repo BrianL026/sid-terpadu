@@ -67,7 +67,12 @@ export default function Dashboard() {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/logout', { method: 'POST' });
+    } catch (err) {
+      console.error('Gagal memanggil API logout:', err);
+    }
     if (typeof window !== 'undefined') {
       localStorage.removeItem('user');
       router.push('/login');

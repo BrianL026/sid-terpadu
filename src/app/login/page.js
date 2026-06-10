@@ -40,7 +40,7 @@ export default function Login() {
       if (data.user.role === 'admin') {
         router.push('/dashboard');
       } else {
-        router.push('/');
+        router.push('/warga/dashboard');
       }
     } catch (err) {
       setError(err.message);

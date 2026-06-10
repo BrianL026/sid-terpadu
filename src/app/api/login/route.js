@@ -25,8 +25,8 @@ export async function POST(request) {
       );
     }
 
-    // Return success response with user profile details
-    return NextResponse.json({
+    // Return success response with user profile details and set HTTP-only cookie
+    const response = NextResponse.json({
       success: true,
       user: {
         id: user.id,
@@ -36,6 +36,21 @@ export async function POST(request) {
         role: user.role,
       },
     });
+
+    response.cookies.set('user_session', JSON.stringify({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    }), {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7, // 1 week
+    });
+
+    return response;
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json(
