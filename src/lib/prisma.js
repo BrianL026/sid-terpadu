@@ -10,6 +10,7 @@ if (globalForPrisma.prisma) {
 } else {
   const adapter = new PrismaLibSql({
     url: process.env.DATABASE_URL || 'file:./dev.db',
+    authToken: process.env.DATABASE_AUTH_TOKEN,
   });
   prismaInstance = new PrismaClient({ adapter });
   
