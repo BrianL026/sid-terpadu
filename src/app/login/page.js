@@ -56,7 +56,7 @@ export default function Login() {
           <div className="card-body p-5">
             <div className="text-center mb-4">
               <img src="/assets/images/logo_minsel.png" alt="Logo Minahasa Selatan" width="70" className="mb-3" />
-              <h3 className="fw-bold text-dark">Login Administrator</h3>
+              <h3 className="fw-bold text-dark">Login</h3>
               <p className="text-muted small">Sistem Informasi Desa Terpadu — Desa Pondos</p>
             </div>
 
