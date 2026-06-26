@@ -1,56 +1,41 @@
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 
 export async function GET() {
   try {
-    // Count citizens in the database and add the offset to match the prototype's 1,250
-    const dbCitizenCount = await prisma.user.count({
-      where: { role: 'warga' },
-    });
-    const totalPenduduk = dbCitizenCount + 1250;
+    const cookieStore = await cookies();
+    const userSession = cookieStore.get('user_session');
 
-    // Count news articles
-    const totalNews = await prisma.news.count();
+    if (!userSession) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
-    // Count pending documents
-    const pendingDocumentsCount = await prisma.document.count({
-      where: { status: 'pending' },
-    });
+    const sessionData = JSON.parse(userSession.value);
+    if (sessionData.role !== 'admin') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
 
-    // Fetch the 5 most recent documents along with the applicant's name
-    const recentDocuments = await prisma.document.findMany({
-      include: {
-        user: true,
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
-      take: 5,
-    });
-
-    // Fetch recent documents for logs
+    // Fetch larger chunk of recent items for full log (e.g. 30 items of each type)
     const recentDocsForLog = await prisma.document.findMany({
       include: { user: true },
       orderBy: { updatedAt: 'desc' },
-      take: 5,
+      take: 30,
     });
 
-    // Fetch recent news
     const recentNewsForLog = await prisma.news.findMany({
       orderBy: { createdAt: 'desc' },
-      take: 5,
+      take: 30,
     });
 
-    // Fetch recent budgets
     const recentBudgetsForLog = await prisma.budget.findMany({
       orderBy: { createdAt: 'desc' },
-      take: 5,
+      take: 30,
     });
 
-    // Fetch recent users
     const recentUsersForLog = await prisma.user.findMany({
       orderBy: { createdAt: 'desc' },
-      take: 5,
+      take: 30,
     });
 
     const activities = [];
@@ -59,22 +44,28 @@ export async function GET() {
     recentDocsForLog.forEach(doc => {
       if (doc.status === 'approved') {
         activities.push({
+          id: `doc-app-${doc.id}`,
           type: 'success',
           icon: 'check-circle-fill',
+          category: 'Surat',
           title: `Surat ${doc.type} (${doc.user.name}) disetujui`,
           time: doc.updatedAt,
         });
       } else if (doc.status === 'rejected') {
         activities.push({
+          id: `doc-rej-${doc.id}`,
           type: 'danger',
           icon: 'x-circle-fill',
+          category: 'Surat',
           title: `Surat ${doc.type} (${doc.user.name}) ditolak`,
           time: doc.updatedAt,
         });
       } else {
         activities.push({
+          id: `doc-pend-${doc.id}`,
           type: 'warning',
           icon: 'clipboard2-check',
+          category: 'Surat',
           title: `Permohonan surat baru: ${doc.type} oleh ${doc.user.name}`,
           time: doc.createdAt,
         });
@@ -84,8 +75,10 @@ export async function GET() {
     // Map news to activities
     recentNewsForLog.forEach(news => {
       activities.push({
+        id: `news-${news.id}`,
         type: 'primary',
         icon: 'pencil-square',
+        category: 'Berita',
         title: `Berita "${news.title}" dipublikasikan`,
         time: news.createdAt,
       });
@@ -94,8 +87,10 @@ export async function GET() {
     // Map budgets to activities
     recentBudgetsForLog.forEach(b => {
       activities.push({
+        id: `budget-${b.id}`,
         type: 'info',
         icon: 'cash-stack',
+        category: 'Anggaran',
         title: `Anggaran ${b.category} (${b.type}) diperbarui`,
         time: b.createdAt,
       });
@@ -104,36 +99,25 @@ export async function GET() {
     // Map users to activities
     recentUsersForLog.forEach(u => {
       activities.push({
+        id: `user-${u.id}`,
         type: 'secondary',
         icon: 'person-plus-fill',
+        category: 'Pengguna',
         title: `Pengguna baru terdaftar: ${u.name} (${u.role === 'admin' ? 'Admin' : 'Warga'})`,
         time: u.createdAt,
       });
     });
 
-    // Sort by time descending and take top 5
+    // Sort by time descending and take top 100
     activities.sort((a, b) => new Date(b.time) - new Date(a.time));
-    const recentActivities = activities.slice(0, 5);
+    const allActivities = activities.slice(0, 100);
 
     return NextResponse.json({
       success: true,
-      stats: {
-        totalPenduduk,
-        totalNews,
-        pendingDocumentsCount,
-        layananAktif: 6, // 6 public services
-      },
-      recentDocuments: recentDocuments.map((doc) => ({
-        id: doc.id,
-        namaPemohon: doc.user.name,
-        jenisSurat: doc.type,
-        tanggal: doc.createdAt,
-        status: doc.status,
-      })),
-      recentActivities,
+      activities: allActivities,
     });
   } catch (error) {
-    console.error('Dashboard API error:', error);
+    console.error('Error fetching activities:', error);
     return NextResponse.json(
       { error: 'Terjadi kesalahan pada server' },
       { status: 500 }

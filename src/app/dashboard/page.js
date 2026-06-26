@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 export default function Dashboard() {
   const [stats, setStats] = useState(null);
   const [recentDocs, setRecentDocs] = useState([]);
+  const [recentActivities, setRecentActivities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(null);
 
@@ -19,6 +20,7 @@ export default function Dashboard() {
       if (res.ok) {
         setStats(data.stats);
         setRecentDocs(data.recentDocuments);
+        setRecentActivities(data.recentActivities || []);
       }
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
@@ -213,41 +215,30 @@ export default function Dashboard() {
               <h5 className="fw-bold mb-0"><i className="bi bi-clock-history me-2"></i>Aktivitas Terakhir</h5>
             </div>
             <div className="card-body px-4 pt-3">
-              <div className="d-flex align-items-start mb-3 pb-3 border-bottom">
-                <span className="badge bg-success bg-opacity-10 text-success me-3 mt-1 p-2 rounded-circle"><i className="bi bi-check-circle-fill"></i></span>
-                <div>
-                  <p className="mb-0 small fw-medium">Surat KK Denny Lontoh telah disetujui</p>
-                  <small className="text-muted">2 jam yang lalu</small>
+              {recentActivities.map((activity, idx) => (
+                <div 
+                  key={idx} 
+                  className={`d-flex align-items-start mb-3 pb-3 ${idx < recentActivities.length - 1 ? 'border-bottom' : ''}`}
+                >
+                  <span className={`badge bg-${activity.type} bg-opacity-10 text-${activity.type} me-3 mt-1 p-2 rounded-circle`}>
+                    <i className={`bi bi-${activity.icon}`}></i>
+                  </span>
+                  <div>
+                    <p className="mb-0 small fw-medium text-dark">{activity.title}</p>
+                    <small className="text-muted">
+                      {new Date(activity.time).toLocaleString('id-ID', {
+                        day: 'numeric',
+                        month: 'short',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                    </small>
+                  </div>
                 </div>
-              </div>
-              <div className="d-flex align-items-start mb-3 pb-3 border-bottom">
-                <span className="badge bg-primary bg-opacity-10 text-primary me-3 mt-1 p-2 rounded-circle"><i className="bi bi-pencil-square"></i></span>
-                <div>
-                  <p className="mb-0 small fw-medium">Berita Musrenbang 2026 dipublikasikan</p>
-                  <small className="text-muted">5 jam yang lalu</small>
-                </div>
-              </div>
-              <div className="d-flex align-items-start mb-3 pb-3 border-bottom">
-                <span className="badge bg-warning bg-opacity-10 text-warning me-3 mt-1 p-2 rounded-circle"><i className="bi bi-clipboard2-check"></i></span>
-                <div>
-                  <p className="mb-0 small fw-medium">Permohonan surat baru dari Maria Wowor</p>
-                  <small className="text-muted">Kemarin, 14:30</small>
-                </div>
-              </div>
-              <div className="d-flex align-items-start mb-3 pb-3 border-bottom">
-                <span className="badge bg-info bg-opacity-10 text-info me-3 mt-1 p-2 rounded-circle"><i className="bi bi-cash-stack"></i></span>
-                <div>
-                  <p className="mb-0 small fw-medium">Data anggaran Q1 2026 diperbarui</p>
-                  <small className="text-muted">Kemarin, 09:15</small>
-                </div>
-              </div>
-              <div className="d-flex align-items-start">
-                <span className="badge bg-danger bg-opacity-10 text-danger me-3 mt-1 p-2 rounded-circle"><i className="bi bi-person-plus-fill"></i></span>
-                <div>
-                  <p className="mb-0 small fw-medium">Admin baru terdaftar: Operator Desa</p>
-                  <small className="text-muted">2 hari yang lalu</small>
-                </div>
-              </div>
+              ))}
+              {recentActivities.length === 0 && (
+                <p className="text-muted small text-center py-4">Belum ada aktivitas tercatat.</p>
+              )}
             </div>
           </div>
         </div>

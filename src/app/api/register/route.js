@@ -41,16 +41,16 @@ export async function POST(request) {
       );
     }
 
-    // Create the user (role default is admin since this is the Admin Registration page)
+    // Create the user (role default is warga)
     const newUser = await prisma.user.create({
       data: {
         nik,
         name,
         email,
         password, // In a real app, hash this!
-        role: 'admin',
-        address: 'Kantor Desa Pondos',
-        dusun: 'Jaga 1',
+        role: 'warga',
+        address: null,
+        dusun: null,
       },
     });
 

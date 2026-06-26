@@ -121,7 +121,7 @@ export default function Register() {
                     type="email" 
                     className="form-control border-start-0" 
                     id="email" 
-                    placeholder="admin@pondos.desa.id"
+                    placeholder="contoh@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
