@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { hashPassword } from '@/lib/auth';
 
 export async function POST(request) {
   try {
     const { nik, name, email, password, confirmPassword } = await request.json();
-
+    
     if (!nik || !name || !email || !password || !confirmPassword) {
       return NextResponse.json(
         { error: 'Semua kolom wajib diisi' },
@@ -47,7 +48,7 @@ export async function POST(request) {
         nik,
         name,
         email,
-        password, // In a real app, hash this!
+        password: hashPassword(password),
         role: 'warga',
         address: null,
         dusun: null,

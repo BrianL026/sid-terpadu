@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { prisma } from '@/lib/prisma';
+import { hashPassword } from '@/lib/auth';
 
 export async function PATCH(request, { params }) {
   try {
@@ -63,7 +64,9 @@ export async function PATCH(request, { params }) {
     }
 
     if (name !== undefined) updateData.name = name;
-    if (password !== undefined) updateData.password = password;
+    if (password !== undefined && password !== existingUser.password && password.trim() !== '') {
+      updateData.password = hashPassword(password);
+    }
     
     if (role !== undefined) {
       // Prevent the currently logged-in admin from changing their own role to 'warga'

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { prisma } from '@/lib/prisma';
+import { hashPassword } from '@/lib/auth';
 
 export async function GET() {
   try {
@@ -86,7 +87,7 @@ export async function POST(request) {
         nik,
         name,
         email,
-        password,
+        password: hashPassword(password),
         role,
         address: address || null,
         dusun: dusun || null,

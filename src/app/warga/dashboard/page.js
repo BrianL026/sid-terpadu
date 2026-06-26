@@ -19,6 +19,14 @@ export default function WargaDashboard() {
   const [formSuccess, setFormSuccess] = useState(false);
   const [formError, setFormError] = useState('');
 
+  // Change password states
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [pwdLoading, setPwdLoading] = useState(false);
+  const [pwdSuccess, setPwdSuccess] = useState('');
+  const [pwdError, setPwdError] = useState('');
+
   useEffect(() => {
     // Check if user is logged in
     if (typeof window !== 'undefined') {
@@ -113,6 +121,54 @@ export default function WargaDashboard() {
       setFormError(err.message);
     } finally {
       setFormLoading(false);
+    }
+  };
+
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    setPwdLoading(true);
+    setPwdError('');
+    setPwdSuccess('');
+
+    if (!currentPassword || !newPassword || !confirmNewPassword) {
+      setPwdError('Semua kolom password wajib diisi.');
+      setPwdLoading(false);
+      return;
+    }
+
+    if (newPassword !== confirmNewPassword) {
+      setPwdError('Konfirmasi password baru tidak cocok.');
+      setPwdLoading(false);
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/warga/profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          currentPassword,
+          newPassword,
+          confirmNewPassword,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Gagal mengubah password.');
+      }
+
+      setPwdSuccess('Password Anda berhasil diperbarui!');
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmNewPassword('');
+    } catch (err) {
+      setPwdError(err.message);
+    } finally {
+      setPwdLoading(false);
     }
   };
 
@@ -574,6 +630,74 @@ export default function WargaDashboard() {
                     </div>
                   </div>
                 </div>
+
+                {/* TAB 4: CHANGE PASSWORD CARD */}
+                <div className="card border-0 shadow-sm rounded-4 mt-4">
+                  <div className="card-body p-4 p-md-5">
+                    <h5 className="fw-bold mb-4"><i className="bi bi-shield-lock text-success me-2"></i>Ubah Password Akun</h5>
+                    
+                    {pwdSuccess && (
+                      <div className="alert alert-success border-0 shadow-sm py-2 px-3 small mb-4" role="alert">
+                        <i className="bi bi-check-circle-fill me-2"></i> {pwdSuccess}
+                      </div>
+                    )}
+                    
+                    {pwdError && (
+                      <div className="alert alert-danger border-0 shadow-sm py-2 px-3 small mb-4" role="alert">
+                        <i className="bi bi-exclamation-triangle-fill me-2"></i> {pwdError}
+                      </div>
+                    )}
+                    
+                    <form onSubmit={handleChangePassword}>
+                      <div className="mb-3">
+                        <label htmlFor="currentPwd" className="form-label text-muted small fw-bold mb-1">Password Saat Ini</label>
+                        <input 
+                          type="password" 
+                          className="form-control border-2 py-2" 
+                          id="currentPwd" 
+                          placeholder="Masukkan password saat ini..."
+                          value={currentPassword}
+                          onChange={(e) => setCurrentPassword(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="row g-3 mb-4">
+                        <div className="col-md-6">
+                          <label htmlFor="newPwd" className="form-label text-muted small fw-bold mb-1">Password Baru</label>
+                          <input 
+                            type="password" 
+                            className="form-control border-2 py-2" 
+                            id="newPwd" 
+                            placeholder="Masukkan password baru..."
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            required
+                          />
+                        </div>
+                        <div className="col-md-6">
+                          <label htmlFor="confirmNewPwd" className="form-label text-muted small fw-bold mb-1">Konfirmasi Password Baru</label>
+                          <input 
+                            type="password" 
+                            className="form-control border-2 py-2" 
+                            id="confirmNewPwd" 
+                            placeholder="Ulangi password baru..."
+                            value={confirmNewPassword}
+                            onChange={(e) => setConfirmNewPassword(e.target.value)}
+                            required
+                          />
+                        </div>
+                      </div>
+                      <button 
+                        type="submit" 
+                        className="btn btn-success px-4 py-2 fw-medium rounded-pill"
+                        disabled={pwdLoading}
+                      >
+                        {pwdLoading ? 'Menyimpan...' : 'Perbarui Password'}
+                      </button>
+                    </form>
+                  </div>
+                </div>
+
               </div>
             </div>
           )}
