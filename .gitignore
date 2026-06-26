@@ -54,3 +54,4 @@ next-env.d.ts
 /_static_backup/
 /dokumentasi
 /prisma/seed.js
+/prisma/migrations/

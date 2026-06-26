@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 
-export async function PATCH(request, { params }) {
+export async function DELETE(request, { params }) {
   try {
     const { id } = await params;
     const cookieStore = await cookies();
@@ -17,31 +17,31 @@ export async function PATCH(request, { params }) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
-    const { status } = await request.json();
+    // Check if the contact message exists
+    const existingMessage = await prisma.contactMessage.findUnique({
+      where: { id },
+    });
 
-    if (!['pending', 'approved', 'rejected'].includes(status)) {
+    if (!existingMessage) {
       return NextResponse.json(
-        { error: 'Status tidak valid' },
-        { status: 400 }
+        { error: 'Pesan pengaduan tidak ditemukan' },
+        { status: 404 }
       );
     }
 
-    // Update the document status in SQLite
-    const updatedDocument = await prisma.document.update({
+    await prisma.contactMessage.delete({
       where: { id },
-      data: { status },
     });
 
     return NextResponse.json({
       success: true,
-      document: updatedDocument,
+      message: 'Pesan pengaduan berhasil dihapus',
     });
   } catch (error) {
-    console.error('Document update API error:', error);
+    console.error('Error deleting contact message:', error);
     return NextResponse.json(
       { error: 'Terjadi kesalahan pada server' },
       { status: 500 }
     );
   }
 }
-

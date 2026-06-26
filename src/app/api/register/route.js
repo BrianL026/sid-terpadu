@@ -42,7 +42,7 @@ export async function POST(request) {
       );
     }
 
-    // Create the user (role default is warga)
+    // Create the user (role default is warga, status is pending)
     const newUser = await prisma.user.create({
       data: {
         nik,
@@ -50,6 +50,7 @@ export async function POST(request) {
         email,
         password: hashPassword(password),
         role: 'warga',
+        status: 'pending',
         address: null,
         dusun: null,
       },

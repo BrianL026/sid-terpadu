@@ -90,6 +90,11 @@ export default function DashboardLayout({ children }) {
             </Link>
           </li>
           <li className="nav-item mb-1">
+            <Link href="/dashboard/kontak" className={`nav-link text-white sidebar-link rounded-3 px-3 py-2 ${isActive('/dashboard/kontak')}`}>
+              <i className="bi bi-chat-right-text me-2"></i>Aspirasi & Pengaduan
+            </Link>
+          </li>
+          <li className="nav-item mb-1">
             <Link href="/dashboard/aktivitas" className={`nav-link text-white sidebar-link rounded-3 px-3 py-2 ${isActive('/dashboard/aktivitas')}`}>
               <i className="bi bi-clock-history me-2"></i>Log Aktivitas
             </Link>
@@ -117,6 +122,7 @@ export default function DashboardLayout({ children }) {
               {pathname === '/dashboard/berita' && <><i className="bi bi-newspaper me-2"></i>Kelola Berita Desa</>}
               {pathname === '/dashboard/anggaran' && <><i className="bi bi-cash-stack me-2"></i>Kelola APBDes</>}
               {pathname === '/dashboard/pengguna' && <><i className="bi bi-people me-2"></i>Kelola Akun Pengguna</>}
+              {pathname === '/dashboard/kontak' && <><i className="bi bi-chat-right-text me-2"></i>Aspirasi & Pengaduan</>}
               {pathname === '/dashboard/aktivitas' && <><i className="bi bi-clock-history me-2"></i>Log Aktivitas</>}
             </h5>
             <div className="d-flex align-items-center">

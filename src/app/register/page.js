@@ -77,7 +77,7 @@ export default function Register() {
 
             {success && (
               <div className="alert alert-success py-2 px-3 small" role="alert">
-                Registrasi berhasil! Mengalihkan ke halaman login...
+                Registrasi berhasil! Akun Anda dalam status pending menunggu persetujuan admin. Mengalihkan ke halaman login...
               </div>
             )}
 

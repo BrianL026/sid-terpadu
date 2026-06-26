@@ -16,6 +16,7 @@ model User {
   email     String     @unique
   password  String
   role      String     @default("warga") // "warga" or "admin"
+  status    String     @default("approved") // "pending", "approved", "rejected"
   address   String?
   dusun     String?
   createdAt DateTime   @default(now())

@@ -26,6 +26,19 @@ export async function POST(request) {
       );
     }
 
+    // Check if user is approved
+    if (user.status === 'pending') {
+      return NextResponse.json(
+        { error: 'Akun Anda belum disetujui oleh admin. Silakan hubungi perangkat desa.' },
+        { status: 403 }
+      );
+    } else if (user.status === 'rejected') {
+      return NextResponse.json(
+        { error: 'Pendaftaran akun Anda ditolak oleh admin.' },
+        { status: 403 }
+      );
+    }
+
     // Return success response with user profile details and set HTTP-only cookie
     const response = NextResponse.json({
       success: true,

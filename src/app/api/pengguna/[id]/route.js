@@ -31,7 +31,28 @@ export async function PATCH(request, { params }) {
     }
 
     const body = await request.json();
-    const { nik, name, email, password, role, address, dusun } = body;
+    const { nik, name, email, password, role, address, dusun, status, resetPassword } = body;
+
+    if (resetPassword) {
+      const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let newPlainPassword = '';
+      for (let i = 0; i < 8; i++) {
+        newPlainPassword += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+
+      await prisma.user.update({
+        where: { id },
+        data: {
+          password: hashPassword(newPlainPassword),
+        },
+      });
+
+      return NextResponse.json({
+        success: true,
+        message: 'Password berhasil di-reset',
+        tempPassword: newPlainPassword,
+      });
+    }
 
     const updateData = {};
 
@@ -81,6 +102,16 @@ export async function PATCH(request, { params }) {
 
     if (address !== undefined) updateData.address = address || null;
     if (dusun !== undefined) updateData.dusun = dusun || null;
+    
+    if (status !== undefined) {
+      if (status !== 'approved' && status !== 'pending' && status !== 'rejected') {
+        return NextResponse.json(
+          { error: 'Status tidak valid' },
+          { status: 400 }
+        );
+      }
+      updateData.status = status;
+    }
 
     const updatedUser = await prisma.user.update({
       where: { id },

@@ -51,11 +51,11 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
-    const { nik, name, email, password, role, address, dusun } = await request.json();
+    const { nik, name, email, role, address, dusun } = await request.json();
 
-    if (!nik || !name || !email || !password || !role) {
+    if (!nik || !name || !email || !role) {
       return NextResponse.json(
-        { error: 'NIK, Nama, Email, Password, dan Role wajib diisi' },
+        { error: 'NIK, Nama, Email, dan Role wajib diisi' },
         { status: 400 }
       );
     }
@@ -82,13 +82,21 @@ export async function POST(request) {
       );
     }
 
+    // Generate a random 8-character temp password
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let tempPassword = '';
+    for (let i = 0; i < 8; i++) {
+      tempPassword += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+
     const newUser = await prisma.user.create({
       data: {
         nik,
         name,
         email,
-        password: hashPassword(password),
+        password: hashPassword(tempPassword),
         role,
+        status: 'approved', // Admin creations are approved by default
         address: address || null,
         dusun: dusun || null,
       },
@@ -97,6 +105,7 @@ export async function POST(request) {
     return NextResponse.json({
       success: true,
       user: newUser,
+      tempPassword, // Return the generated plaintext password so the admin can copy it
     });
   } catch (error) {
     console.error('Error creating user:', error);
