@@ -1,8 +1,21 @@
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 
 export async function GET() {
   try {
+    const cookieStore = await cookies();
+    const userSession = cookieStore.get('user_session');
+
+    if (!userSession) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const sessionData = JSON.parse(userSession.value);
+    if (sessionData.role !== 'admin') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+
     // Count citizens in the database and add the offset to match the prototype's 1,250
     const dbCitizenCount = await prisma.user.count({
       where: { role: 'warga' },
