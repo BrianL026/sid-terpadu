@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import ShareButtons from '@/components/ShareButtons';
 
+export const dynamic = 'force-dynamic';
+
 export default async function NewsDetail({ params }) {
   const { slug } = await params;
 

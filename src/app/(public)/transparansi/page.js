@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import BudgetChart from "@/components/BudgetChart";
 
+export const dynamic = 'force-dynamic';
+
 export default async function Transparansi() {
   // Query all budget records from SQLite
   const budgets = await prisma.budget.findMany();

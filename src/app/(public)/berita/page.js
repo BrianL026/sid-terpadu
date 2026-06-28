@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 
+export const dynamic = 'force-dynamic';
+
 const getCategoryBadgeClass = (category) => {
   switch (category?.toLowerCase()) {
     case 'pemerintahan': return 'bg-success';
